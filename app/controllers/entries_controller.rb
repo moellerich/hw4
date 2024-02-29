@@ -6,8 +6,9 @@ class EntriesController < ApplicationController
   def create
     @entry = Entry.new
     @entry["title"] = params["title"]
-    @entry["description"] = params["description"]
     @entry["occurred_on"] = params["occurred_on"]
+    @entry["image"] = params["image"]
+    @entry["description"] = params["description"]
     @entry["user_id"] = @current_user["id"]
     @entry["place_id"] = params["place_id"]
     @entry.save
