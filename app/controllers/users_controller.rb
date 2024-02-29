@@ -11,8 +11,9 @@ class UsersController < ApplicationController
       @user["password"] = BCrypt::Password.create(params["password"])
       @user.save
       redirect_to "/places"
-  else
-    flash["notice"] = "Email taken."
-    redirect_to "/users/new"
+    else
+      flash["notice"] = "Email taken."
+      redirect_to "/users/new"
+    end
   end
 end
