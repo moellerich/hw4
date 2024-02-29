@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tacostagram Final</title>
+    <title>Travel Journal</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,17 +9,20 @@
     <link rel="stylesheet" href="/stylesheets/application.css">
   </head>
 
-  <body>
-    <div>
-      <%= flash["notice"] %>
-    </div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <a href="/login">Login</a>
-      <a href="/users/new">Signup</a>
+  
+  <div class="container">
+      <% @current_user %>
+        <% if @user == nil %>
+          <a href="/users/new">Signup</a>
+          |
+          <a href="/login">Login</a>
+        <p><%= flash["notice"] %></p>
+        <% else %>
+          Logged in as: <%= @user["username"] %>
+          |
+          <a href="/logout">Logout</a>
+        <% end %>
     </div>
 
     <%= yield %>
-  </body>
 </html>
