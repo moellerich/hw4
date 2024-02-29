@@ -8,6 +8,7 @@ class EntriesController < ApplicationController
     @entry["title"] = params["title"]
     @entry["description"] = params["description"]
     @entry["occurred_on"] = params["occurred_on"]
+    @entry["user_id"] = @current_user["id"]
     @entry["place_id"] = params["place_id"]
     @entry.save
     redirect_to "/places/#{@entry["place_id"]}"

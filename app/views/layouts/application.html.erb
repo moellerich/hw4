@@ -11,11 +11,11 @@
 
   
   <div class="container">
-      <% @current_user %>
+      <% @user = User.find_by({ "id" => session["user_id"] }) %>
         <% if @user == nil %>
-          <a href="/users/new">Signup</a>
-          |
-          <a href="/login">Login</a>
+            <a href="/users/new">Signup</a>
+            |
+            <a href="/login">Login</a>
         <p><%= flash["notice"] %></p>
         <% else %>
           Logged in as: <%= @user["username"] %>
