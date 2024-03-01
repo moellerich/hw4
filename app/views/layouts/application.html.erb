@@ -24,25 +24,47 @@
 
   
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <% @user = User.find_by({ "id" => session["user_id"] }) %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% if @current_user %>
+            <li class="nav-item">
+              <button class="btn btn-outline-primary"><a href="/places">Home</a></button>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <button class="btn btn-outline-primary"><a href="/login">Home</a></button>
+            </li>
+          <% end %>
+        </ul>
+        
+        <ul class="navbar-nav mb-2 mb-lg-0">
+                  <% @user = User.find_by({ "id" => session["user_id"] }) %>
           <% if @user == nil %>
-                <a href="/users/new">Signup</a>
+                <button class="btn btn-outline-primary"><a href="/users/new">Signup</a></button>
                 |
-                <a href="/login">Login</a>
+                <button class="btn btn-outline-primary"><a href="/login">Login</a></button>
           <p><%= flash["notice"] %></p>
           <% else %>
-            <a href="/places">Home</a>
             Logged in as: <%= @user["username"] %>
             |
-            <a href="/logout">Logout</a>
+            <button class="btn btn-outline-primary"><a href="/logout">Logout</a></button>
           <% end %>
         </div>
-      </nav>
-      
-      <div class="container">
-      <%= yield %>
+  
       </div>
-    </body>
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <% if flash["notice"] != nil %>
+      <div class="alert alert-primary">
+        <%= flash["notice"] %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+</body>
 </html>
